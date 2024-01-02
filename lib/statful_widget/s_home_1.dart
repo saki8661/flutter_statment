@@ -66,7 +66,7 @@ class _HomeScreen1State extends State<HomeScreen1> {
             onPressedCatalog: onPressedCatalog,
           ),
           CartWidget(
-            catList: catalogList,
+            cartList: catalogList,
             onPressedCatalog: onPressedCatalog,
           ),
         ],

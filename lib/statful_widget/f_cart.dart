@@ -5,12 +5,12 @@ import '../common/models/vo_catalog.dart';
 
 class CartWidget extends StatelessWidget {
   // 선택된 카탈로그 정보를 받고, 콜백 함수까지 전달 받아야 함.
-  final List<Catalog> catList;
+  final List<Catalog> cartList;
   final void Function(Catalog catalog) onPressedCatalog;
 
   const CartWidget({
     super.key,
-    required this.catList,
+    required this.cartList,
     required this.onPressedCatalog,
   });
 
@@ -22,10 +22,10 @@ class CartWidget extends StatelessWidget {
         Expanded(
           flex: 5,
           child: ListView.builder(
-            itemCount: catList.length,
+            itemCount: cartList.length,
             itemBuilder: (context, index) {
               // 하나에 오브젝트만 뽑자.
-              Catalog catalog = catList[index];
+              Catalog catalog = cartList[index];
               return CatalogItem(
                   catalog: catalog,
                   isInCart: true,
@@ -44,7 +44,7 @@ class CartWidget extends StatelessWidget {
           flex: 1,
           child: Center(
             child: Text(
-              'SUM : ${catList.length}',
+              'SUM : ${cartList.length}',
               style: TextStyle(
                 fontSize: 22.0,
                 fontWeight: FontWeight.bold,

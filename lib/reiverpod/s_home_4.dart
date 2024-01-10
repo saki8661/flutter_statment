@@ -1,4 +1,5 @@
 import 'package:class_statement/common/models/vo_catalog.dart';
+import 'package:class_statement/reiverpod/state/riverpod_badge.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,8 +7,6 @@ import '../common/w_bottom_bar.dart';
 import 'f_cart.dart';
 import 'f_catalog.dart';
 
-// 상태관리 Stateful과 콜백으로
-// 상태가 있는 위젯 생성
 class HomeScreen4 extends StatefulWidget {
   const HomeScreen4({super.key});
 
@@ -18,7 +17,6 @@ class HomeScreen4 extends StatefulWidget {
 class _HomeScreen4State extends State<HomeScreen4> {
   // 현재 성택된 index
   int currentIndex = 0;
-
 
   // 샘플데이터 (localDB, 통신)
   late List<Catalog> responseListData;
@@ -48,15 +46,18 @@ class _HomeScreen4State extends State<HomeScreen4> {
             CartWidget(),
           ],
         ),
-        bottomNavigationBar: BottomBar(
-          currentIndex: currentIndex,
-          // 코드 수정 예정
-          cartTotal: '${0}',
-          onTap: (index) {
-            setState(() {
-              currentIndex = index;
-            });
-          },
+        // 특정 부분만 렌더링 하고 싶다면
+        bottomNavigationBar: Consumer(
+          builder: (context, ref, child) => BottomBar(
+            currentIndex: currentIndex,
+            // 코드 수정 예정
+            cartTotal: '${ref.watch(badgeProvider)}',
+            onTap: (index) {
+              setState(() {
+                currentIndex = index;
+              });
+            },
+          ),
         ),
       ),
     );
